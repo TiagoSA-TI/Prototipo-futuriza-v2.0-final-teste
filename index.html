@@ -41,6 +41,7 @@
         justify-content:center;
       }
 
+      /* O próprio app vira o corpo do celular. */
       .app-shell,
       .demo-screen,
       .login-screen {
@@ -53,20 +54,15 @@
         margin:0 auto !important;
         border:7px solid #171824 !important;
         border-radius:46px !important;
-        overflow-x:hidden !important;
-        overflow-y:auto !important;
-        scrollbar-width:none;
-        -ms-overflow-style:none;
+        overflow:hidden !important;
         box-shadow:0 28px 70px rgba(23,24,36,.28),0 8px 24px rgba(2,84,230,.12),inset 0 0 0 1px rgba(255,255,255,.15) !important;
       }
-      .app-shell::-webkit-scrollbar,
-      .demo-screen::-webkit-scrollbar,
-      .login-screen::-webkit-scrollbar { display:none; }
 
-      .app-shell { background:var(--bg,#f7f8fc) !important; }
+      .app-shell { background:var(--bg,#f7f8fc) !important; display:flex !important; flex-direction:column !important; }
       .demo-screen { background:linear-gradient(135deg,#0254E6,#2F78F0) !important; padding:32px 20px !important; }
       .login-screen { background:linear-gradient(135deg,#0254E6,#2F78F0) !important; padding:24px 20px !important; }
 
+      /* Dynamic Island / câmera: aparece em todas as três telas. */
       .app-shell::before,
       .demo-screen::before,
       .login-screen::before {
@@ -98,34 +94,36 @@
         pointer-events:none;
       }
 
+      /* O conteúdo fica dentro da tela; a rolagem acontece dentro do celular. */
       .app-shell > * { max-width:100%; }
-      .topbar { padding-left:20px !important; padding-right:20px !important; }
-      .main-content { width:100% !important; max-width:none !important; padding:24px 18px 120px !important; }
+      .topbar { flex:0 0 auto !important; padding-left:20px !important; padding-right:20px !important; }
+      .main-content { width:100% !important; max-width:none !important; flex:1 1 auto !important; min-height:0 !important; height:auto !important; overflow-y:auto !important; overflow-x:hidden !important; padding:24px 18px 120px !important; box-sizing:border-box !important; scrollbar-gutter:stable; }
       .home-grid,.insight-grid,.detail-grid,.course-grid { grid-template-columns:1fr !important; }
       .hero-card { padding:28px 22px !important; border-radius:22px !important; }
       .hero-card h1 { font-size:30px !important; }
       .hero-actions { flex-direction:column !important; }
       .not-match-card,.cta-strip,.journey-head { align-items:flex-start !important; flex-direction:column !important; }
 
-      /* A navegação fica presa ao rodapé VISÍVEL do celular durante o scroll. */
+      /* A barra inferior agora pertence ao celular, não à janela do desktop. */
       .app-shell .bottom-nav {
-        position:sticky !important;
-        left:auto !important;
-        right:auto !important;
+        position:absolute !important;
+        left:14px !important;
+        right:14px !important;
         bottom:14px !important;
-        width:calc(100% - 28px) !important;
+        width:auto !important;
         max-width:none !important;
-        margin:0 14px !important;
         transform:none !important;
         z-index:300 !important;
       }
 
+      /* Telas de entrada: cartão interno ocupa a largura do aparelho. */
       .demo-screen,
       .login-screen { display:flex !important; align-items:center !important; justify-content:center !important; }
       .demo-card,
       .login-card { position:relative; z-index:2; width:100% !important; max-width:360px !important; max-height:calc(100% - 30px); overflow:auto; }
     }
 
+    /* Celular real: sem moldura artificial, usando toda a tela. */
     @media (max-width:699px) {
       .app-shell,.demo-screen,.login-screen { width:100%; min-width:0; max-width:none; border-radius:0; border:0; box-shadow:none; }
       .app-shell .bottom-nav { position:fixed; }
@@ -134,6 +132,7 @@
 </head>
 <body>
   <div id="root"></div>
+  <script src="./scroll-fix.js"></script>
   <script type="module" src="./main.jsx"></script>
 </body>
 </html>
