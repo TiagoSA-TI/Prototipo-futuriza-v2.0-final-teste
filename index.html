@@ -6,139 +6,127 @@
   <title>Futuriza - Orientação Profissional e Cursos</title>
   <link rel="icon" type="image/png" href="./futuriza-logo.png" />
   <style>
+    /* A logo oficial continua sendo a mesma; apenas corrigimos o caminho no GitHub Pages. */
     img[src="/futuriza-logo.png"] { content: url("./futuriza-logo.png"); }
+
     .demo-logo,
     .login-logo {
-      display: block !important;
-      width: 170px !important;
-      height: 100px !important;
-      max-width: 170px !important;
-      max-height: 100px !important;
-      min-width: 0 !important;
-      min-height: 0 !important;
-      object-fit: contain !important;
-      object-position: center !important;
-      margin: 0 auto 24px !important;
+      display:block !important;
+      width:170px !important;
+      height:100px !important;
+      max-width:170px !important;
+      max-height:100px !important;
+      object-fit:contain !important;
+      object-position:center !important;
+      margin:0 auto 24px !important;
     }
-    .login-logo { margin-bottom: 20px !important; }
+    .login-logo { margin-bottom:20px !important; }
 
-    /* ===== Modo demonstracao: smartphone centralizado no desktop ===== */
-    @media (min-width: 700px) {
-      html, body, #root {
-        min-height: 100%;
-      }
-
+    /* =========================================================
+       APRESENTAÇÃO DESKTOP = EXPERIÊNCIA MOBILE EM UM CELULAR
+       ========================================================= */
+    @media (min-width:700px) {
+      html, body { min-height:100%; }
       body {
-        min-height: 100vh;
-        padding: 28px 0;
-        background:
-          radial-gradient(circle at 50% 20%, rgba(47,120,240,.18), transparent 34%),
-          linear-gradient(135deg, #eef4ff 0%, #f7f8fc 48%, #eaf1ff 100%);
+        min-height:100vh;
+        margin:0;
+        padding:28px 0;
+        background:radial-gradient(circle at 50% 18%, rgba(47,120,240,.16), transparent 34%), linear-gradient(135deg,#eef4ff 0%,#f7f8fc 48%,#eaf1ff 100%);
+        overflow:auto;
       }
-
       #root {
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        min-height: calc(100vh - 56px);
+        min-height:calc(100vh - 56px);
+        display:flex;
+        align-items:flex-start;
+        justify-content:center;
       }
 
-      .app-shell {
-        position: relative;
-        width: min(430px, calc(100vw - 40px));
-        min-height: 820px;
-        height: calc(100vh - 56px);
-        max-height: 900px;
-        overflow: hidden;
-        background: var(--bg, #f7f8fc);
-        border: 7px solid #171824;
-        border-radius: 46px;
-        box-shadow:
-          0 28px 70px rgba(23,24,36,.28),
-          0 8px 24px rgba(2,84,230,.12),
-          inset 0 0 0 1px rgba(255,255,255,.15);
+      /* O próprio app vira o corpo do celular. */
+      .app-shell,
+      .demo-screen,
+      .login-screen {
+        position:relative !important;
+        width:430px !important;
+        min-width:430px !important;
+        height:calc(100vh - 56px) !important;
+        min-height:760px !important;
+        max-height:900px !important;
+        margin:0 auto !important;
+        border:7px solid #171824 !important;
+        border-radius:46px !important;
+        overflow:hidden !important;
+        box-shadow:0 28px 70px rgba(23,24,36,.28),0 8px 24px rgba(2,84,230,.12),inset 0 0 0 1px rgba(255,255,255,.15) !important;
       }
 
-      /* Alto-falante / Dynamic Island estilizado */
-      .app-shell::before {
-        content: "";
-        position: absolute;
-        z-index: 999;
-        top: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 112px;
-        height: 24px;
-        border-radius: 999px;
-        background: #171824;
-        box-shadow: inset 0 1px 2px rgba(255,255,255,.08);
-        pointer-events: none;
+      .app-shell { background:var(--bg,#f7f8fc) !important; }
+      .demo-screen { background:linear-gradient(135deg,#0254E6,#2F78F0) !important; padding:32px 20px !important; }
+      .login-screen { background:linear-gradient(135deg,#0254E6,#2F78F0) !important; padding:24px 20px !important; }
+
+      /* Dynamic Island / câmera: aparece em todas as três telas. */
+      .app-shell::before,
+      .demo-screen::before,
+      .login-screen::before {
+        content:"";
+        position:absolute;
+        z-index:9999;
+        top:10px;
+        left:50%;
+        transform:translateX(-50%);
+        width:112px;
+        height:24px;
+        border-radius:999px;
+        background:#171824;
+        box-shadow:inset 0 1px 2px rgba(255,255,255,.08);
+        pointer-events:none;
+      }
+      .app-shell::after,
+      .demo-screen::after,
+      .login-screen::after {
+        content:"";
+        position:absolute;
+        z-index:10000;
+        top:17px;
+        left:calc(50% + 38px);
+        width:7px;
+        height:7px;
+        border-radius:50%;
+        background:#303245;
+        pointer-events:none;
       }
 
-      .app-shell::after {
-        content: "";
-        position: absolute;
-        z-index: 998;
-        top: 17px;
-        left: calc(50% + 38px);
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: #303245;
-        pointer-events: none;
+      /* O conteúdo fica dentro da tela; nada pode escapar da moldura. */
+      .app-shell > * { max-width:100%; }
+      .topbar { padding-left:20px !important; padding-right:20px !important; }
+      .main-content { width:100% !important; max-width:none !important; padding:24px 18px 120px !important; }
+      .home-grid,.insight-grid,.detail-grid,.course-grid { grid-template-columns:1fr !important; }
+      .hero-card { padding:28px 22px !important; border-radius:22px !important; }
+      .hero-card h1 { font-size:30px !important; }
+      .hero-actions { flex-direction:column !important; }
+      .not-match-card,.cta-strip,.journey-head { align-items:flex-start !important; flex-direction:column !important; }
+
+      /* A barra inferior agora pertence ao celular, não à janela do desktop. */
+      .app-shell .bottom-nav {
+        position:absolute !important;
+        left:14px !important;
+        right:14px !important;
+        bottom:14px !important;
+        width:auto !important;
+        max-width:none !important;
+        transform:none !important;
+        z-index:300 !important;
       }
 
-      .topbar {
-        padding-left: 20px !important;
-        padding-right: 20px !important;
-      }
-
-      .main-content {
-        width: 100%;
-        max-width: none;
-        padding: 24px 18px 120px;
-      }
-
-      .home-grid,
-      .insight-grid,
-      .detail-grid,
-      .course-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-card {
-        padding: 28px 22px;
-        border-radius: 22px;
-      }
-
-      .hero-card h1 {
-        font-size: 30px;
-      }
-
-      .hero-actions {
-        flex-direction: column;
-      }
-
-      .journey-head,
-      .cta-strip,
-      .not-match-card {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .bottom-nav {
-        width: 390px;
-        max-width: calc(100% - 44px);
-        bottom: 28px;
-      }
+      /* Telas de entrada: cartão interno ocupa a largura do aparelho. */
+      .demo-screen,
+      .login-screen { display:flex !important; align-items:center !important; justify-content:center !important; }
+      .demo-card,
+      .login-card { position:relative; z-index:2; width:100% !important; max-width:360px !important; max-height:calc(100% - 30px); overflow:auto; }
     }
 
-    /* Em telas pequenas, o prototipo continua ocupando a tela inteira. */
-    @media (max-width: 699px) {
-      .app-shell {
-        width: 100%;
-        min-height: 100vh;
-      }
+    /* Celular real: sem moldura artificial, usando toda a tela. */
+    @media (max-width:699px) {
+      .app-shell,.demo-screen,.login-screen { width:100%; min-width:0; max-width:none; border-radius:0; border:0; box-shadow:none; }
+      .app-shell .bottom-nav { position:fixed; }
     }
   </style>
 </head>
