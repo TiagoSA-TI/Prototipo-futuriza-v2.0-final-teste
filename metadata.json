@@ -1,0 +1,6 @@
+{
+  "name": "Futuriza",
+  "description": "Protótipo Futuriza - Plataforma de orientação profissional, carreiras e cursos",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
