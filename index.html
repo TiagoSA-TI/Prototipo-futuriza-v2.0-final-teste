@@ -2,10 +2,24 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Futuriza - Orientação Profissional e Cursos</title>
   <link rel="icon" type="image/png" href="./futuriza-logo.png" />
   <style>
+    /* Apresentação em formato de aplicativo mobile, inclusive no desktop */
+    html, body { margin: 0; padding: 0; min-height: 100%; }
+    body { background: #e9eef7; overflow-x: hidden; }
+    #root {
+      width: min(430px, 100vw);
+      max-width: 430px;
+      min-height: 100vh;
+      margin: 0 auto;
+      background: #f7f8fc;
+      overflow-x: hidden;
+      box-shadow: 0 0 40px rgba(23, 24, 36, .14);
+    }
+
+    /* Mantém a logo oficial e o caminho correto no GitHub Pages */
     img[src="/futuriza-logo.png"] { content: url("./futuriza-logo.png"); }
     .demo-logo,
     .login-logo {
@@ -21,6 +35,41 @@
       margin: 0 auto 24px !important;
     }
     .login-logo { margin-bottom: 20px !important; }
+
+    /* Força o layout interno a respeitar a largura do aparelho */
+    #root .demo-screen,
+    #root .login-screen,
+    #root .app-shell {
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      min-height: 100vh;
+      box-sizing: border-box;
+      overflow-x: hidden;
+    }
+    #root .topbar { padding-left: 16px !important; padding-right: 16px !important; }
+    #root .main-content { width: 100%; max-width: 100%; padding: 24px 16px 120px; }
+    #root .home-grid,
+    #root .insight-grid,
+    #root .detail-grid,
+    #root .course-grid { grid-template-columns: 1fr !important; }
+    #root .hero-card { padding: 30px 22px; }
+    #root .hero-card h1 { font-size: 32px; }
+    #root .test-card,
+    #root .result-preview-card { padding: 26px 20px; }
+    #root .journey-head,
+    #root .cta-strip,
+    #root .not-match-card { flex-direction: column; align-items: stretch; }
+    #root .career-card { flex-direction: column; }
+    #root .bottom-nav {
+      width: min(406px, calc(100vw - 24px)) !important;
+      max-width: 406px;
+    }
+
+    @media (max-width: 430px) {
+      body { background: #f7f8fc; }
+      #root { box-shadow: none; }
+    }
   </style>
 </head>
 <body>
