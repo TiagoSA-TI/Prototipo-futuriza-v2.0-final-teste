@@ -2,24 +2,10 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Futuriza - Orientação Profissional e Cursos</title>
   <link rel="icon" type="image/png" href="./futuriza-logo.png" />
   <style>
-    /* Apresentação em formato de aplicativo mobile, inclusive no desktop */
-    html, body { margin: 0; padding: 0; min-height: 100%; }
-    body { background: #e9eef7; overflow-x: hidden; }
-    #root {
-      width: min(430px, 100vw);
-      max-width: 430px;
-      min-height: 100vh;
-      margin: 0 auto;
-      background: #f7f8fc;
-      overflow-x: hidden;
-      box-shadow: 0 0 40px rgba(23, 24, 36, .14);
-    }
-
-    /* Mantém a logo oficial e o caminho correto no GitHub Pages */
     img[src="/futuriza-logo.png"] { content: url("./futuriza-logo.png"); }
     .demo-logo,
     .login-logo {
@@ -36,39 +22,123 @@
     }
     .login-logo { margin-bottom: 20px !important; }
 
-    /* Força o layout interno a respeitar a largura do aparelho */
-    #root .demo-screen,
-    #root .login-screen,
-    #root .app-shell {
-      width: 100% !important;
-      max-width: 100% !important;
-      min-width: 0 !important;
-      min-height: 100vh;
-      box-sizing: border-box;
-      overflow-x: hidden;
-    }
-    #root .topbar { padding-left: 16px !important; padding-right: 16px !important; }
-    #root .main-content { width: 100%; max-width: 100%; padding: 24px 16px 120px; }
-    #root .home-grid,
-    #root .insight-grid,
-    #root .detail-grid,
-    #root .course-grid { grid-template-columns: 1fr !important; }
-    #root .hero-card { padding: 30px 22px; }
-    #root .hero-card h1 { font-size: 32px; }
-    #root .test-card,
-    #root .result-preview-card { padding: 26px 20px; }
-    #root .journey-head,
-    #root .cta-strip,
-    #root .not-match-card { flex-direction: column; align-items: stretch; }
-    #root .career-card { flex-direction: column; }
-    #root .bottom-nav {
-      width: min(406px, calc(100vw - 24px)) !important;
-      max-width: 406px;
+    /* ===== Modo demonstracao: smartphone centralizado no desktop ===== */
+    @media (min-width: 700px) {
+      html, body, #root {
+        min-height: 100%;
+      }
+
+      body {
+        min-height: 100vh;
+        padding: 28px 0;
+        background:
+          radial-gradient(circle at 50% 20%, rgba(47,120,240,.18), transparent 34%),
+          linear-gradient(135deg, #eef4ff 0%, #f7f8fc 48%, #eaf1ff 100%);
+      }
+
+      #root {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: calc(100vh - 56px);
+      }
+
+      .app-shell {
+        position: relative;
+        width: min(430px, calc(100vw - 40px));
+        min-height: 820px;
+        height: calc(100vh - 56px);
+        max-height: 900px;
+        overflow: hidden;
+        background: var(--bg, #f7f8fc);
+        border: 7px solid #171824;
+        border-radius: 46px;
+        box-shadow:
+          0 28px 70px rgba(23,24,36,.28),
+          0 8px 24px rgba(2,84,230,.12),
+          inset 0 0 0 1px rgba(255,255,255,.15);
+      }
+
+      /* Alto-falante / Dynamic Island estilizado */
+      .app-shell::before {
+        content: "";
+        position: absolute;
+        z-index: 999;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 112px;
+        height: 24px;
+        border-radius: 999px;
+        background: #171824;
+        box-shadow: inset 0 1px 2px rgba(255,255,255,.08);
+        pointer-events: none;
+      }
+
+      .app-shell::after {
+        content: "";
+        position: absolute;
+        z-index: 998;
+        top: 17px;
+        left: calc(50% + 38px);
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #303245;
+        pointer-events: none;
+      }
+
+      .topbar {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+      }
+
+      .main-content {
+        width: 100%;
+        max-width: none;
+        padding: 24px 18px 120px;
+      }
+
+      .home-grid,
+      .insight-grid,
+      .detail-grid,
+      .course-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card {
+        padding: 28px 22px;
+        border-radius: 22px;
+      }
+
+      .hero-card h1 {
+        font-size: 30px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .journey-head,
+      .cta-strip,
+      .not-match-card {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .bottom-nav {
+        width: 390px;
+        max-width: calc(100% - 44px);
+        bottom: 28px;
+      }
     }
 
-    @media (max-width: 430px) {
-      body { background: #f7f8fc; }
-      #root { box-shadow: none; }
+    /* Em telas pequenas, o prototipo continua ocupando a tela inteira. */
+    @media (max-width: 699px) {
+      .app-shell {
+        width: 100%;
+        min-height: 100vh;
+      }
     }
   </style>
 </head>
